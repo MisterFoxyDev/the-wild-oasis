@@ -2,15 +2,13 @@ import styled from "styled-components";
 import PropTypes from "prop-types"; // Ajoutez cette ligne
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
-import { cloneElement, createContext, useContext, useState } from "react";
-import { useOutsideClick } from "../hooks/useOutsideClick";
 
 const StyledModal = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--color-grey-300);
+  background-color: var(--color-grey-0);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
   padding: 3.2rem 4rem;
@@ -54,56 +52,28 @@ const Button = styled.button`
   }
 `;
 
-const ModalContext = createContext();
-
-const Modal = ({ children }) => {
-  const [openName, setOpenName] = useState("");
-
-  const close = () => setOpenName("");
-  const open = (name) => setOpenName(name);
-
-  return (
-    <ModalContext.Provider value={{ openName, close, open }}>
-      {children}
-    </ModalContext.Provider>
-  );
-};
-
-const Open = ({ children, opens: opensWindowName }) => {
-  const { open } = useContext(ModalContext);
-
-  return cloneElement(children, { onClick: () => open(opensWindowName) });
-};
-
-const Window = ({ children, name }) => {
-  const { openName, close } = useContext(ModalContext);
-  const ref = useOutsideClick(close);
-
-  if (name !== openName) return null;
-
+const Modal = ({ children, onClose }) => {
   return createPortal(
     <Overlay>
-      <StyledModal ref={ref}>
-        <Button onClick={close}>
+      <StyledModal>
+        <Button onClick={onClose}>
           <HiXMark />
         </Button>
-        <div>{cloneElement(children, { onCloseModal: close })}</div>
+        <div>{children}</div>
       </StyledModal>
     </Overlay>,
     document.body,
   );
 };
 
-Modal.Open = Open;
-Modal.Window = Window;
+const Open = () => {};
 
-Window.propTypes = {
-  children: PropTypes.node,
-  name: PropTypes.string,
-};
+Modal.IsOpen = Open;
 
+// Ajoutez cette section pour la validation des props
 Modal.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired, // Validation pour onClose
 };
 
 export default Modal;
