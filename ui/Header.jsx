@@ -1,15 +1,13 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 const StyledHeader = styled.header`
-background-color: var(--color-grey-0);
-padding: 1.2rem 4.8rem;
-border-bottom: solid 1px var(--color-grey-100);
-`;
+  background-color: var(--color-grey-0);
+  padding: 1.2rem 4.8rem;
+  border-bottom: solid 1px var(--color-grey-100);
+`
 
 const Header = () => {
-  return ( <StyledHeader>
-HEADER
-</StyledHeader>
-)};
+  return <StyledHeader></StyledHeader>
+}
 
-export default Header;
+export default Header
