@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { format, isToday } from "date-fns";
+import PropTypes from "prop-types";
 
 import Tag from "../../ui/Tag";
 import Table from "../../ui/Table";
@@ -45,13 +46,13 @@ function BookingRow({
     totalPrice,
     status,
     guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
-  },
+    cabins: { name: cabinName }
+  }
 }) {
   const statusToTagName = {
     unconfirmed: "blue",
     "checked-in": "green",
-    "checked-out": "silver",
+    "checked-out": "silver"
   };
 
   return (
@@ -82,5 +83,25 @@ function BookingRow({
     </Table.Row>
   );
 }
+
+BookingRow.propTypes = {
+  booking: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    created_at: PropTypes.string.isRequired,
+    startDate: PropTypes.string.isRequired,
+    endDate: PropTypes.string.isRequired,
+    numNights: PropTypes.number.isRequired,
+    numGuests: PropTypes.number.isRequired,
+    totalPrice: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
+    guests: PropTypes.shape({
+      fullName: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired
+    }).isRequired,
+    cabins: PropTypes.shape({
+      name: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
+};
 
 export default BookingRow;
