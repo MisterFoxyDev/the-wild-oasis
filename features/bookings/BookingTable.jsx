@@ -14,7 +14,7 @@ function BookingTable() {
     return <Spinner />;
   }
 
-  if (!bookings.length) {
+  if (!bookings?.length) {
     return <Empty resourceName="booking" />;
   }
 

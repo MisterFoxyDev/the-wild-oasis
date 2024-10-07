@@ -4,7 +4,7 @@ import {
   HiOutlineChatBubbleBottomCenterText,
   HiOutlineCheckCircle,
   HiOutlineCurrencyDollar,
-  HiOutlineHomeModern,
+  HiOutlineHomeModern
 } from "react-icons/hi2";
 
 import DataItem from "../../ui/DataItem";
@@ -117,7 +117,7 @@ function BookingDataBox({ booking }) {
     observations,
     isPaid,
     guests: { fullName: guestName, email, country, countryFlag, nationalID },
-    cabins: { name: cabinName },
+    cabins: { name: cabinName }
   } = booking;
 
   return (
@@ -170,7 +170,7 @@ function BookingDataBox({ booking }) {
 
             {hasBreakfast &&
               ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
-                extrasPrice,
+                extrasPrice
               )} breakfast)`}
           </DataItem>
 
@@ -186,7 +186,7 @@ function BookingDataBox({ booking }) {
 }
 
 BookingDataBox.propTypes = {
-  booking: PropTypes.object.isRequired,
+  booking: PropTypes.object.isRequired
 };
 
 export default BookingDataBox;

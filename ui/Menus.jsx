@@ -89,10 +89,12 @@ const Toggle = ({ id }) => {
   const { openId, close, open, setPosition } = useContext(MenusContext);
 
   function handleClick(e) {
+    e.stopPropagation();
+
     const rect = e.target.closest("button").getBoundingClientRect();
     setPosition({
       x: window.innerWidth - rect.width - rect.x,
-      y: rect.y + rect.height + 8,
+      y: rect.y + rect.height + 8
     });
 
     openId === "" || openId !== id ? open(id) : close();
@@ -115,7 +117,7 @@ const List = ({ id, children }) => {
     <StyledList position={position} ref={ref}>
       {children}
     </StyledList>,
-    document.body,
+    document.body
   );
 };
 
@@ -143,19 +145,19 @@ Menus.List = List;
 Menus.Button = Button;
 
 Menus.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 Toggle.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 List.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 Button.propTypes = {
   children: PropTypes.node,
   icon: PropTypes.node,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 export default Menus;

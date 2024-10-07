@@ -49,7 +49,7 @@ const CabinRow = ({ cabin }) => {
     regularPrice,
     description,
     discount,
-    image,
+    image
   } = cabin;
 
   const { isCreating, createCabin } = useCreateCabin();
@@ -61,7 +61,7 @@ const CabinRow = ({ cabin }) => {
       regularPrice,
       discount,
       description,
-      image,
+      image
     });
   };
 
@@ -82,7 +82,11 @@ const CabinRow = ({ cabin }) => {
             <Menus.Toggle id={cabinId} />
 
             <Menus.List id={cabinId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
+              <Menus.Button
+                icon={<HiSquare2Stack />}
+                onClick={handleDuplicate}
+                disabled={isCreating}
+              >
                 Duplicate
               </Menus.Button>
 
@@ -114,7 +118,7 @@ const CabinRow = ({ cabin }) => {
 };
 
 CabinRow.propTypes = {
-  cabin: PropTypes.object.isRequired,
+  cabin: PropTypes.object.isRequired
 };
 
 export default CabinRow;

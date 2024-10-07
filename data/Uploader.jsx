@@ -90,11 +90,9 @@ async function createBookings() {
       totalPrice,
       guestId: allGuestIds.at(booking.guestId - 1),
       cabinId: allCabinIds.at(booking.cabinId - 1),
-      status,
+      status
     };
   });
-
-  console.log(finalBookings);
 
   const { error } = await supabase.from("bookings").insert(finalBookings);
   if (error) console.log(error.message);
@@ -129,16 +127,16 @@ function Uploader() {
     <div
       style={{
         marginTop: "auto",
-        backgroundColor: "#e0e7ff",
+        backgroundColor: "var(--color-grey-400: #9ca3af)",
         padding: "8px",
         borderRadius: "5px",
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
-        gap: "8px",
+        gap: "8px"
       }}
     >
-      <h3>SAMPLE DATA</h3>
+      <h3 style={{ color: "#1f2937" }}>SAMPLE DATA</h3>
 
       <Button onClick={uploadAll} disabled={isLoading}>
         Upload ALL
