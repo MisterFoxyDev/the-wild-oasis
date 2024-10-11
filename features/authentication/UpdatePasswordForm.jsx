@@ -12,7 +12,12 @@ function UpdatePasswordForm() {
 
   const { updateUser, isUpdating } = useUpdateUser();
 
+  const isEditable = false;
+
   function onSubmit({ password }) {
+    if (!isEditable) {
+      return;
+    }
     updateUser({ password }, { onSuccess: reset });
   }
 
@@ -26,7 +31,7 @@ function UpdatePasswordForm() {
           type="password"
           id="password"
           autoComplete="current-password"
-          disabled={isUpdating}
+          disabled={isUpdating || !isEditable}
           {...register("password", {
             required: "This field is required",
             minLength: {
@@ -45,7 +50,7 @@ function UpdatePasswordForm() {
           type="password"
           autoComplete="new-password"
           id="passwordConfirm"
-          disabled={isUpdating}
+          disabled={isUpdating || !isEditable}
           {...register("passwordConfirm", {
             required: "This field is required",
             validate: (value) =>
